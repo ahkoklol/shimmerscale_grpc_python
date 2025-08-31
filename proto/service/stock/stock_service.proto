@@ -1,0 +1,29 @@
+syntax = "proto3";
+
+package service.stock.stock_service;
+
+// gRPC Service definition
+service StockService {
+  rpc GetStockInfo(StockRequest) returns (StockResponse);
+}
+
+message StockRequest {
+  string ticker = 1; // ticker symbol
+  optional string annual_report_url = 2; // url of the annual report to analyze
+}
+
+message StockResponse {
+  string ticker = 1; // ticker symbol
+  string name = 2; // name
+  string year = 3; // year of analysis
+  optional double current_price = 4; // current price
+  double total_revenue = 5; // total revenue
+  double operating_revenue = 6; // revenue from operations
+  double operating_income = 7; // income from operations
+  double net_income = 8; // net income
+  optional double ebitda = 9; // earnings before interest, taxes, depreciation and amortization
+  optional double eps = 10; // earnings per share
+  optional double basic_average_shares = 11; // number of shares
+  optional double research_and_development = 12; // r&d costs
+  optional double total_expenses = 13; // total expenses
+}
