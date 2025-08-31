@@ -3,7 +3,7 @@
 import grpc
 import warnings
 
-from service.stock import stock_service_pb2 as service_dot_stock_dot_stock__service__pb2
+from . import stock_service_pb2 as stock__service__pb2
 
 GRPC_GENERATED_VERSION = '1.74.0'
 GRPC_VERSION = grpc.__version__
@@ -18,7 +18,7 @@ except ImportError:
 if _version_not_supported:
     raise RuntimeError(
         f'The grpc package installed is at version {GRPC_VERSION},'
-        + f' but the generated code in service/stock/stock_service_pb2_grpc.py depends on'
+        + f' but the generated code in stock_service_pb2_grpc.py depends on'
         + f' grpcio>={GRPC_GENERATED_VERSION}.'
         + f' Please upgrade your grpc module to grpcio>={GRPC_GENERATED_VERSION}'
         + f' or downgrade your generated code using grpcio-tools<={GRPC_VERSION}.'
@@ -36,9 +36,9 @@ class StockServiceStub(object):
             channel: A grpc.Channel.
         """
         self.GetStockInfo = channel.unary_unary(
-                '/service.stock.stock_service.StockService/GetStockInfo',
-                request_serializer=service_dot_stock_dot_stock__service__pb2.StockRequest.SerializeToString,
-                response_deserializer=service_dot_stock_dot_stock__service__pb2.StockResponse.FromString,
+                '/StockService/GetStockInfo',
+                request_serializer=stock__service__pb2.StockRequest.SerializeToString,
+                response_deserializer=stock__service__pb2.StockResponse.FromString,
                 _registered_method=True)
 
 
@@ -57,14 +57,14 @@ def add_StockServiceServicer_to_server(servicer, server):
     rpc_method_handlers = {
             'GetStockInfo': grpc.unary_unary_rpc_method_handler(
                     servicer.GetStockInfo,
-                    request_deserializer=service_dot_stock_dot_stock__service__pb2.StockRequest.FromString,
-                    response_serializer=service_dot_stock_dot_stock__service__pb2.StockResponse.SerializeToString,
+                    request_deserializer=stock__service__pb2.StockRequest.FromString,
+                    response_serializer=stock__service__pb2.StockResponse.SerializeToString,
             ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
-            'service.stock.stock_service.StockService', rpc_method_handlers)
+            'StockService', rpc_method_handlers)
     server.add_generic_rpc_handlers((generic_handler,))
-    server.add_registered_method_handlers('service.stock.stock_service.StockService', rpc_method_handlers)
+    server.add_registered_method_handlers('StockService', rpc_method_handlers)
 
 
  # This class is part of an EXPERIMENTAL API.
@@ -86,9 +86,9 @@ class StockService(object):
         return grpc.experimental.unary_unary(
             request,
             target,
-            '/service.stock.stock_service.StockService/GetStockInfo',
-            service_dot_stock_dot_stock__service__pb2.StockRequest.SerializeToString,
-            service_dot_stock_dot_stock__service__pb2.StockResponse.FromString,
+            '/StockService/GetStockInfo',
+            stock__service__pb2.StockRequest.SerializeToString,
+            stock__service__pb2.StockResponse.FromString,
             options,
             channel_credentials,
             insecure,

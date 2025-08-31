@@ -1,7 +1,5 @@
 syntax = "proto3";
 
-package service.stock.stock_service;
-
 // gRPC Service definition
 service StockService {
   rpc GetStockInfo(StockRequest) returns (StockResponse);
