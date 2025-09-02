@@ -25,8 +25,7 @@ class ExcelDataExtractingService:
             # Ensure numeric columns are parsed correctly
             numeric_cols = [
                 'year', 'total_revenue', 'operating_income', 'net_income',
-                'ebitda', 'eps', 'basic_average_shares',
-                'research_and_development', 'total_expenses'
+                'eps', 'basic_average_shares', 'total_expenses'
             ]
             for col in numeric_cols:
                 if col in df.columns:

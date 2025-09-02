@@ -1,10 +1,15 @@
 import yfinance as yf
 
 from service.excel_data_extracting_service import ExcelDataExtractingService
+from service.stock_forecasting_service import StockForecastingService
+from service.stock_forecasting_service_ml import StockForecastingServiceML
+
 
 class StockDataService:
     def __init__(self):
         self.excel_data_extracting = ExcelDataExtractingService()
+        self.stock_forecasting = StockForecastingService(self.excel_data_extracting)
+        self.stock_forecasting_ml = StockForecastingServiceML(self.excel_data_extracting)
 
     def get_ttm_stock_data(self, ticker: str) -> dict:
         stock = yf.Ticker(ticker)
@@ -32,7 +37,6 @@ class StockDataService:
             "year": "TTM",
             "current_price": info.get("currentPrice"),
             "total_revenue": safe_get("TotalRevenue"),
-            "operating_revenue": safe_get("OperatingRevenue"),
             "operating_income": safe_get("OperatingIncome"),
             "net_income": safe_get("NetIncome"),
             "ebitda": safe_get("EBITDA"),
@@ -53,3 +57,51 @@ class StockDataService:
         data["current_price"] = info.get("currentPrice")
 
         return data
+
+    def predict_cagr(self, ticker: str, start: int, end: int, horizon: int = 5):
+        print(f"\n[PREDICT] Starting CAGR prediction for {ticker} {start}–{end}, horizon={horizon}")
+
+        forecasts = self.stock_forecasting.rolling_cagr_forecast(ticker, start, end, horizon=horizon)
+        print(f"[PREDICT] Rolling forecasts count = {len(forecasts)}")
+
+        results = []
+
+        for f in forecasts:
+            print(f"\n[PREDICT] Processing {f['train_period']} → {f['forecast_period']}")
+            actuals = f["actuals"]
+            years = sorted(actuals.keys())
+            if len(years) >= 2:
+                actual_cagr = self.stock_forecasting.historical_cagr(ticker, years[0], years[-1])
+            else:
+                actual_cagr = None
+            print(f"[PREDICT] Predicted CAGR={f['cagr']}, Actual CAGR={actual_cagr}")
+
+            comparison = self.stock_forecasting.compare_forecasts(f["forecasts"], f["actuals"])
+            print(f"[PREDICT] Comparison metrics: {comparison}")
+
+            results.append({
+                "train_period": f["train_period"],
+                "forecast_period": f["forecast_period"],
+                "predicted_cagr": f["cagr"],
+                "actual_cagr": actual_cagr,
+                "forecast_vs_actual": comparison
+            })
+
+        final_prediction = forecasts[-1]["cagr"] if forecasts else None
+        print(f"\n[PREDICT] Final predicted CAGR = {final_prediction}")
+
+        return {
+            "comparisons": results,
+            "final_predicted_cagr": final_prediction
+        }
+
+    def predict_5y_eps_growth(self, ticker: str):
+        """
+        Predict the next 5-year EPS CAGR using XGBoost.
+        """
+        growth = self.stock_forecasting_ml.predict_5y_growth(ticker)
+        return {
+            "ticker": ticker,
+            "predicted_5y_eps_cagr": growth
+        }
+

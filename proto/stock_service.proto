@@ -3,6 +3,7 @@ syntax = "proto3";
 // gRPC Service definition
 service StockService {
   rpc GetStockInfo(StockRequest) returns (StockResponse);
+  rpc GetCagrForecast(CagrForecastRequest) returns (CagrForecastResponse);
 }
 
 message StockRequest {
@@ -24,4 +25,14 @@ message StockResponse {
   optional double basic_average_shares = 10; // number of shares
   optional double research_and_development = 11; // r&d costs
   optional double total_expenses = 12; // total expenses
+}
+
+message CagrForecastRequest {
+  string ticker = 1;
+  int32 start = 2;
+  int32 end = 3;
+}
+
+message CagrForecastResponse {
+  string message = 1;
 }
