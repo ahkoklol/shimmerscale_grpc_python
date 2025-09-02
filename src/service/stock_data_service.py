@@ -1,8 +1,10 @@
 import yfinance as yf
 
+from service.excel_data_extracting_service import ExcelDataExtractingService
+
 class StockDataService:
     def __init__(self):
-        pass
+        self.excel_data_extracting = ExcelDataExtractingService()
 
     def get_ttm_stock_data(self, ticker: str) -> dict:
         stock = yf.Ticker(ticker)
@@ -39,3 +41,15 @@ class StockDataService:
             "research_and_development": safe_get("ResearchAndDevelopment"),
             "total_expenses": safe_get("TotalExpenses"),
         }
+
+    def get_financials(self, ticker, year) -> dict:
+
+        data = self.excel_data_extracting.get_financials(ticker, year)
+
+        stock = yf.Ticker(ticker)
+        info = stock.info
+
+        data["name"] = info.get("shortName")
+        data["current_price"] = info.get("currentPrice")
+
+        return data
