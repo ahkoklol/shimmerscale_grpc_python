@@ -2,7 +2,7 @@ from concurrent import futures
 import grpc
 from service.stock_service import StockService   # import the class
 
-from service.stock import stock_service_pb2_grpc  # only for adding servicer
+from generated.service.stock import stock_service_pb2_grpc  # only for adding servicer
 
 def serve():
     print("Starting gRPC server…")

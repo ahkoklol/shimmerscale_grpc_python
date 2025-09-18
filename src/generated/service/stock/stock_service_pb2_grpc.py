@@ -3,7 +3,7 @@
 import grpc
 import warnings
 
-from service.stock import stock_service_pb2 as service_dot_stock_dot_stock__service__pb2
+from . import stock_service_pb2 as service_dot_stock_dot_stock__service__pb2
 
 GRPC_GENERATED_VERSION = '1.74.0'
 GRPC_VERSION = grpc.__version__

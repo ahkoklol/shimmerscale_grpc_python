@@ -1,4 +1,4 @@
-from service.stock import stock_service_pb2, stock_service_pb2_grpc
+from generated.service.stock import stock_service_pb2, stock_service_pb2_grpc
 
 class StockService(stock_service_pb2_grpc.StockServiceServicer):
     def GetStockInfo(self, request, context):
