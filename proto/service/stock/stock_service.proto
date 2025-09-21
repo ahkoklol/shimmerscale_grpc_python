@@ -5,6 +5,7 @@ package service.stock.stock_service;
 // gRPC Service definition
 service StockService {
   rpc GetStockInfo(StockRequest) returns (StockResponse);
+  rpc GetEps(EpsRequest) returns (EpsResponse);
 }
 
 message StockRequest {
@@ -23,4 +24,19 @@ message StockResponse {
   optional double eps = 9; // earnings per share
   optional double basic_average_shares = 10; // number of shares
   optional double total_expenses = 11; // total expenses
+}
+
+message EpsRequest {
+  string ticker = 1; // ticker symbol
+  string type = 2; // annual or quarterly
+}
+
+message EpsResponse {
+  repeated Eps eps = 1; // earnings per share
+  string type = 2; // annual or quarterly
+}
+
+message Eps {
+  double value = 1;
+  string date = 2;
 }

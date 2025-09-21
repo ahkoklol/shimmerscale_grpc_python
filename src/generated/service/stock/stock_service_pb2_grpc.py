@@ -40,6 +40,11 @@ class StockServiceStub(object):
                 request_serializer=service_dot_stock_dot_stock__service__pb2.StockRequest.SerializeToString,
                 response_deserializer=service_dot_stock_dot_stock__service__pb2.StockResponse.FromString,
                 _registered_method=True)
+        self.GetEps = channel.unary_unary(
+                '/service.stock.stock_service.StockService/GetEps',
+                request_serializer=service_dot_stock_dot_stock__service__pb2.EpsRequest.SerializeToString,
+                response_deserializer=service_dot_stock_dot_stock__service__pb2.EpsResponse.FromString,
+                _registered_method=True)
 
 
 class StockServiceServicer(object):
@@ -52,6 +57,12 @@ class StockServiceServicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
+    def GetEps(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
 
 def add_StockServiceServicer_to_server(servicer, server):
     rpc_method_handlers = {
@@ -59,6 +70,11 @@ def add_StockServiceServicer_to_server(servicer, server):
                     servicer.GetStockInfo,
                     request_deserializer=service_dot_stock_dot_stock__service__pb2.StockRequest.FromString,
                     response_serializer=service_dot_stock_dot_stock__service__pb2.StockResponse.SerializeToString,
+            ),
+            'GetEps': grpc.unary_unary_rpc_method_handler(
+                    servicer.GetEps,
+                    request_deserializer=service_dot_stock_dot_stock__service__pb2.EpsRequest.FromString,
+                    response_serializer=service_dot_stock_dot_stock__service__pb2.EpsResponse.SerializeToString,
             ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
@@ -89,6 +105,33 @@ class StockService(object):
             '/service.stock.stock_service.StockService/GetStockInfo',
             service_dot_stock_dot_stock__service__pb2.StockRequest.SerializeToString,
             service_dot_stock_dot_stock__service__pb2.StockResponse.FromString,
+            options,
+            channel_credentials,
+            insecure,
+            call_credentials,
+            compression,
+            wait_for_ready,
+            timeout,
+            metadata,
+            _registered_method=True)
+
+    @staticmethod
+    def GetEps(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(
+            request,
+            target,
+            '/service.stock.stock_service.StockService/GetEps',
+            service_dot_stock_dot_stock__service__pb2.EpsRequest.SerializeToString,
+            service_dot_stock_dot_stock__service__pb2.EpsResponse.FromString,
             options,
             channel_credentials,
             insecure,

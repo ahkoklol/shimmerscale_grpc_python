@@ -24,7 +24,7 @@ _sym_db = _symbol_database.Default()
 
 
 
-DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n!service/stock/stock_service.proto\x12\x1bservice.stock.stock_service\"\x1e\n\x0cStockRequest\x12\x0e\n\x06ticker\x18\x01 \x01(\t\"\xd4\x02\n\rStockResponse\x12\x0e\n\x06ticker\x18\x01 \x01(\t\x12\x0c\n\x04name\x18\x02 \x01(\t\x12\x0c\n\x04year\x18\x03 \x01(\t\x12\x1a\n\rcurrent_price\x18\x04 \x01(\x01H\x00\x88\x01\x01\x12\x15\n\rtotal_revenue\x18\x05 \x01(\x01\x12\x18\n\x10operating_income\x18\x06 \x01(\x01\x12\x12\n\nnet_income\x18\x07 \x01(\x01\x12\x13\n\x06\x65\x62itda\x18\x08 \x01(\x01H\x01\x88\x01\x01\x12\x10\n\x03\x65ps\x18\t \x01(\x01H\x02\x88\x01\x01\x12!\n\x14\x62\x61sic_average_shares\x18\n \x01(\x01H\x03\x88\x01\x01\x12\x1b\n\x0etotal_expenses\x18\x0b \x01(\x01H\x04\x88\x01\x01\x42\x10\n\x0e_current_priceB\t\n\x07_ebitdaB\x06\n\x04_epsB\x17\n\x15_basic_average_sharesB\x11\n\x0f_total_expenses2u\n\x0cStockService\x12\x65\n\x0cGetStockInfo\x12).service.stock.stock_service.StockRequest\x1a*.service.stock.stock_service.StockResponseb\x06proto3')
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n!service/stock/stock_service.proto\x12\x1bservice.stock.stock_service\"\x1e\n\x0cStockRequest\x12\x0e\n\x06ticker\x18\x01 \x01(\t\"\xd4\x02\n\rStockResponse\x12\x0e\n\x06ticker\x18\x01 \x01(\t\x12\x0c\n\x04name\x18\x02 \x01(\t\x12\x0c\n\x04year\x18\x03 \x01(\t\x12\x1a\n\rcurrent_price\x18\x04 \x01(\x01H\x00\x88\x01\x01\x12\x15\n\rtotal_revenue\x18\x05 \x01(\x01\x12\x18\n\x10operating_income\x18\x06 \x01(\x01\x12\x12\n\nnet_income\x18\x07 \x01(\x01\x12\x13\n\x06\x65\x62itda\x18\x08 \x01(\x01H\x01\x88\x01\x01\x12\x10\n\x03\x65ps\x18\t \x01(\x01H\x02\x88\x01\x01\x12!\n\x14\x62\x61sic_average_shares\x18\n \x01(\x01H\x03\x88\x01\x01\x12\x1b\n\x0etotal_expenses\x18\x0b \x01(\x01H\x04\x88\x01\x01\x42\x10\n\x0e_current_priceB\t\n\x07_ebitdaB\x06\n\x04_epsB\x17\n\x15_basic_average_sharesB\x11\n\x0f_total_expenses\"*\n\nEpsRequest\x12\x0e\n\x06ticker\x18\x01 \x01(\t\x12\x0c\n\x04type\x18\x02 \x01(\t\"J\n\x0b\x45psResponse\x12-\n\x03\x65ps\x18\x01 \x03(\x0b\x32 .service.stock.stock_service.Eps\x12\x0c\n\x04type\x18\x02 \x01(\t\"\"\n\x03\x45ps\x12\r\n\x05value\x18\x01 \x01(\x01\x12\x0c\n\x04\x64\x61te\x18\x02 \x01(\t2\xd2\x01\n\x0cStockService\x12\x65\n\x0cGetStockInfo\x12).service.stock.stock_service.StockRequest\x1a*.service.stock.stock_service.StockResponse\x12[\n\x06GetEps\x12\'.service.stock.stock_service.EpsRequest\x1a(.service.stock.stock_service.EpsResponseb\x06proto3')
 
 _globals = globals()
 _builder.BuildMessageAndEnumDescriptors(DESCRIPTOR, _globals)
@@ -35,6 +35,12 @@ if not _descriptor._USE_C_DESCRIPTORS:
   _globals['_STOCKREQUEST']._serialized_end=96
   _globals['_STOCKRESPONSE']._serialized_start=99
   _globals['_STOCKRESPONSE']._serialized_end=439
-  _globals['_STOCKSERVICE']._serialized_start=441
-  _globals['_STOCKSERVICE']._serialized_end=558
+  _globals['_EPSREQUEST']._serialized_start=441
+  _globals['_EPSREQUEST']._serialized_end=483
+  _globals['_EPSRESPONSE']._serialized_start=485
+  _globals['_EPSRESPONSE']._serialized_end=559
+  _globals['_EPS']._serialized_start=561
+  _globals['_EPS']._serialized_end=595
+  _globals['_STOCKSERVICE']._serialized_start=598
+  _globals['_STOCKSERVICE']._serialized_end=808
 # @@protoc_insertion_point(module_scope)
